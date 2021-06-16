@@ -3,23 +3,8 @@ set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_VERSION Cortex-M4-STM32F407)
 set(CMAKE_SYSTEM_PROCESSOR arm)
 
-# settinge either of the compilers builds the absolute paths for the other tools:
-#   ar, nm, objcopy, objdump, ranlib, readelf -- but not as, ld, size
-# if the compiler cannot be found the try_compile() function will fail the build
-# set(CMAKE_C_COMPILER arm-none-eabi-gcc)
-# set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
-
-# we need to get compiler path itself, for the toolchain
-# but still rely on try_compile to check we have a valid compiler
-
-find_program(CROSS_GCC_PATH arm-none-eabi-gcc)
-get_filename_component(TOOLCHAIN ${CROSS_GCC_PATH} PATH)
-
-set(CMAKE_C_COMPILER ${TOOLCHAIN}/arm-none-eabi-gcc)
-set(CMAKE_Cxx_COMPILER ${TOOLCHAIN}/arm-none-eabi-g++)
-set(TOOLCHAIN_as ${TOOLCHAIN}/arm-none-eabi-as CACHE STRING "arm-none-eabi-as")
-set(TOOLCHAIN_LD ${TOOLCHAIN}/arm-none-eabi-ld CACHE STRING "arm-none-eabi-ld")
-set(TOOLCHAIN_SIZE ${TOOLCHAIN}/arm-none-eabi-size CACHE STRING "arm-none-eabi-size")
+set(CMAKE_C_COMPILER arm-none-eabi-gcc)
+set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
 
 # --specs=nano.specs is both a compiler and linker option
 set(ARM_OPTIONS -mcpu=cortex-m4 -mfloat-abi=soft --specs=nano.specs)
