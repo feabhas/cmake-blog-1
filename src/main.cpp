@@ -46,9 +46,9 @@ inline void clear(volatile uint32_t *const port, uint32_t pattern)
 constexpr int led_start {8};
 constexpr int led_end {11};
 
-int main(void)
+int main()
 {
-	uint32_t value {};
+    uint32_t value {};
     value = *AHB1_enable;
     value |= (0x1u << 3); 
     *AHB1_enable = value;
